@@ -1,0 +1,55 @@
+Which of the following option leads to the portability and security of Java?
+Bytecode is executed by JVM
+The applet makes the Java code secure and portable
+Use of exception handling
+Dynamic binding between objects
+Which of the following is not a Java features?
+Use of pointers
+Dynamic
+Architecture Neutral
+Object-oriented
+The \u0021 article referred to as a
+Unicode escape sequence
+Octal escape
+Hexadecimal
+Line feed
+_____ is used to find and fix bugs in the Java programs.
+JDB
+JVM
+JRE
+JDK
+What is the return type of the hashCode() method in the Object class?
+int
+Object
+long
+void
+What does the expression float a = 35 / 0 return?
+Infinity
+0
+Not a Number
+Run time exception
+Which of the following tool is used to generate API documentation in HTML format from doc comments in source code?
+Javadoc tool
+javap tool
+javaw command
+javah command
+Which method of the Class.class is used to determine the name of a class represented by the class object as a String?
+getName()
+getClass()
+intern()
+toString()
+What do you mean by nameless objects?
+An object that has no reference.
+An object created by using the new keyword.
+An object of a superclass created in the subclass.
+An object without having any name but having a reference.
+Which option is false about the final keyword?
+A final class cannot extend other classes.
+A final method cannot be overridden in its subclasses.
+A final class cannot be extended.
+A final method can be inherited.
+If a thread goes to sleep
+It does not release any locks.
+It releases all the locks it has.
+It releases half of its locks.
+It releases all of its lock except one.

@@ -1,0 +1,41 @@
+.display:disabled {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 25px;
+	-fx-font-family: "Helvetica Neue Light";
+	-fx-opacity: 1;
+}
+
+.display:disabled .content {
+	-fx-background-color: black;
+	-fx-opacity: 1;
+}
+
+.display:disabled *.text {
+	-fx-text-alignment: right;
+	-fx-opacity: 1;
+}
+
+.operators {
+	-fx-background-color: #FE9340;
+	-fx-text-fill: #ffffff;
+}
+
+.operators:pressed {
+	-fx-background-color: darkorange;
+}
+
+.topOperators {
+	-fx-background-color: #D6D6D6;
+}
+
+.topOperators:pressed {
+	-fx-background-color: #cccccc;
+}
+
+.digits {
+	-fx-background-color: #e7e7e7;
+}
+
+.digits:pressed {
+	-fx-background-color: #e4e4e4;
+}
