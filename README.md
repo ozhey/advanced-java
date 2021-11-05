@@ -1,1 +1,1 @@
-# Solutions for advanced java course in The Open Univercity semester 2022A
+### Solutions for advanced java course of The Open University, semester 2022A
