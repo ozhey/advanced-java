@@ -32,6 +32,7 @@ public class GameController {
     private Text result;
     @FXML
     private Button next;
+    private Text[] answersText; // an array of 4 text elements that contain the answers
     
     private QuestionRepo repo;
     private int numOfQuestions;
@@ -41,7 +42,7 @@ public class GameController {
     private int MAX_SCORE = 100;
     
     public GameController() {
-        repo = new QuestionRepo("exam.txt");
+        repo = new QuestionRepo("exdam.txt");
         numOfQuestions = repo.getNumOfQuestions();
     }
     
@@ -51,7 +52,15 @@ public class GameController {
         currQuestionNum = 0;
         score = 0;
         result.setText("");
-        loadQuestion();
+        answersText = new Text[] {answerOne, answerTwo, answerThree, answerFour};
+        if (numOfQuestions == 0) { 
+            disableAnsBtns();
+            next.setDisable(true);
+            question.setFill(Color.RED);
+            question.setText("Error: the questions file wasn't found or did not contain any questions");
+        } else {
+            loadQuestion();
+        }
     }
 
     // gets the user's answer.
@@ -75,10 +84,7 @@ public class GameController {
             default:
                 break;
         }
-        btnOne.setDisable(true);
-        btnTwo.setDisable(true);
-        btnThree.setDisable(true);
-        btnFour.setDisable(true);
+        disableAnsBtns();
     }
     
     // shows the next question, or the result of the game if there are no more questions.
@@ -94,10 +100,7 @@ public class GameController {
                 next.setText("End Quiz");
             }
             loadQuestion();
-            btnOne.setDisable(false);
-            btnTwo.setDisable(false);
-            btnThree.setDisable(false);
-            btnFour.setDisable(false);
+            enableAnsBtns();
             result.setText("");
         } else if (next.getText().equals("Start a New Game")) {
             initialize();
@@ -110,10 +113,9 @@ public class GameController {
         currQuestion = repo.getQuestion(currQuestionNum);
         question.setText("Question: " + currQuestion.getQuestion());
         ArrayList<String> answers = currQuestion.getAnswers();
-        answerOne.setText(answers.get(0));
-        answerTwo.setText(answers.get(1));
-        answerThree.setText(answers.get(2));
-        answerFour.setText(answers.get(3));
+        for (int i = 0; i < answersText.length; i++) {
+            answersText[i].setText(answers.get(i));
+        }
     }
 
     // gets an answer and prints to the user if the answer was correct or not.
@@ -126,6 +128,22 @@ public class GameController {
             result.setFill(Color.RED);
             result.setText("Wrong!");
         }
+    }
+
+    // enables the answer buttons
+    private void disableAnsBtns() {
+        btnOne.setDisable(true);
+        btnTwo.setDisable(true);
+        btnThree.setDisable(true);
+        btnFour.setDisable(true);
+    }
+
+    // disables the answer buttons
+    private void enableAnsBtns() {
+        btnOne.setDisable(false);
+        btnTwo.setDisable(false);
+        btnThree.setDisable(false);
+        btnFour.setDisable(false);
     }
  
 }

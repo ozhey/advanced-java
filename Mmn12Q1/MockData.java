@@ -47,21 +47,27 @@ public final class MockData {
         Employee[] employees = new Employee[numOfEmployees];
         for (int i = 0; i < employees.length; i++) {
             EmployeeType employeeType = employeeTypes[rnd.nextInt(employeeTypes.length)];
+            String firstName = firstNames[rnd.nextInt(firstNames.length)];
+            String lastName = lastNames[rnd.nextInt(lastNames.length)];
+            String socialSecurityNumber = socialSecurityNumbers[rnd.nextInt(socialSecurityNumbers.length)];
+            int yearOfBirth = rnd.nextInt(65) + 1940; // 1940 to 2004
+            int monthOfBirth = rnd.nextInt(12);
+            int dayOfBirth = rnd.nextInt(29);
             switch (employeeType) {
             case COMMISSION:
-                employees[i] = getMockCommissionEmployee();
+                employees[i] = getMockCommissionEmployee(firstName, lastName, socialSecurityNumber, yearOfBirth,  monthOfBirth, dayOfBirth);
                 break;
             case BASE_PLUS_COMMISSION:
-                employees[i] = getMockBasePlusCommissionEmployee();
+                employees[i] = getMockBasePlusCommissionEmployee(firstName, lastName, socialSecurityNumber, yearOfBirth,  monthOfBirth, dayOfBirth);
                 break;
             case HOURLY:
-                employees[i] = getMockHourlyEmployee();
+                employees[i] = getMockHourlyEmployee(firstName, lastName, socialSecurityNumber, yearOfBirth,  monthOfBirth, dayOfBirth);
                 break;
             case SALARIED:
-                employees[i] = getMockSalariedEmployee();
+                employees[i] = getMockSalariedEmployee(firstName, lastName, socialSecurityNumber, yearOfBirth,  monthOfBirth, dayOfBirth);
                 break;
             case PIECE_WORKER:
-                employees[i] = getMockPieceWorkerEmployee();
+                employees[i] = getMockPieceWorkerEmployee(firstName, lastName, socialSecurityNumber, yearOfBirth,  monthOfBirth, dayOfBirth);
                 break;
             default:
                 break;
@@ -71,72 +77,41 @@ public final class MockData {
     }
 
     // Returns a random commission employee
-    private static CommissionEmployee getMockCommissionEmployee() {
-        String firstName = firstNames[rnd.nextInt(firstNames.length)];
-        String lastName = lastNames[rnd.nextInt(lastNames.length)];
-        String socialSecurityNumber = socialSecurityNumbers[rnd.nextInt(socialSecurityNumbers.length)];
+    private static CommissionEmployee getMockCommissionEmployee(String firstName, String lastName, String socialSecurityNumber, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         double grossSales = rnd.nextDouble() * 55000 + 5000; // 5000 to 60000
         double commissionRate = rnd.nextDouble() / 10; // 0 to 0.1
-        int yearOfBirth = rnd.nextInt(65) + 1940; // 1940 to 2004
-        int monthOfBirth = rnd.nextInt(12);
-        int dayOfBirth = rnd.nextInt(29);
         return new CommissionEmployee(firstName, lastName, socialSecurityNumber, grossSales, commissionRate,
                 yearOfBirth, monthOfBirth, dayOfBirth);
     }
 
     // Returns a random piece worker employee
-    private static PieceWorkerEmployee getMockPieceWorkerEmployee() {
-        String firstName = firstNames[rnd.nextInt(firstNames.length)];
-        String lastName = lastNames[rnd.nextInt(lastNames.length)];
-        String socialSecurityNumber = socialSecurityNumbers[rnd.nextInt(socialSecurityNumbers.length)];
+    private static PieceWorkerEmployee getMockPieceWorkerEmployee(String firstName, String lastName, String socialSecurityNumber, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         int piecesSold = rnd.nextInt(3000);
         double salaryPerPiece = rnd.nextDouble() * 10;
-        int yearOfBirth = rnd.nextInt(65) + 1940; // 1940 to 2004
-        int monthOfBirth = rnd.nextInt(12);
-        int dayOfBirth = rnd.nextInt(29);
         return new PieceWorkerEmployee(firstName, lastName, socialSecurityNumber, piecesSold, salaryPerPiece,
                 yearOfBirth, monthOfBirth, dayOfBirth);
     }
 
     // Returns a random hourly employee
-    private static HourlyEmployee getMockHourlyEmployee() {
-        String firstName = firstNames[rnd.nextInt(firstNames.length)];
-        String lastName = lastNames[rnd.nextInt(lastNames.length)];
-        String socialSecurityNumber = socialSecurityNumbers[rnd.nextInt(socialSecurityNumbers.length)];
+    private static HourlyEmployee getMockHourlyEmployee(String firstName, String lastName, String socialSecurityNumber, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         double wage = rnd.nextDouble() * 30 + 10; // 10 to 40 $ per hour
         double hours = rnd.nextDouble() * 168; // 0.0 to 168.0 hours
-        int yearOfBirth = rnd.nextInt(65) + 1940; // 1940 to 2004
-        int monthOfBirth = rnd.nextInt(12);
-        int dayOfBirth = rnd.nextInt(29);
         return new HourlyEmployee(firstName, lastName, socialSecurityNumber, wage, hours, yearOfBirth, monthOfBirth,
                 dayOfBirth);
     }
 
     // Returns a random base plus commission employee
-    private static BasePlusCommissionEmployee getMockBasePlusCommissionEmployee() {
-        String firstName = firstNames[rnd.nextInt(firstNames.length)];
-        String lastName = lastNames[rnd.nextInt(lastNames.length)];
-        String socialSecurityNumber = socialSecurityNumbers[rnd.nextInt(socialSecurityNumbers.length)];
+    private static BasePlusCommissionEmployee getMockBasePlusCommissionEmployee(String firstName, String lastName, String socialSecurityNumber, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         double grossSales = rnd.nextDouble() * 55000 + 5000; // 5000.0 to 60000.0
         double commissionRate = rnd.nextDouble() / 10; // 0.0 to 0.1
         double baseSalary = rnd.nextDouble() * 5000; // 0.0 to 5000.0
-        int yearOfBirth = rnd.nextInt(65) + 1940; // 1940 to 2004
-        int monthOfBirth = rnd.nextInt(12);
-        int dayOfBirth = rnd.nextInt(29);
         return new BasePlusCommissionEmployee(firstName, lastName, socialSecurityNumber, grossSales, commissionRate,
                 baseSalary, yearOfBirth, monthOfBirth, dayOfBirth);
     }
 
     // Returns a random salaried employee
-    private static SalariedEmployee getMockSalariedEmployee() {
-        Random rnd = new Random();
-        String firstName = firstNames[rnd.nextInt(firstNames.length)];
-        String lastName = lastNames[rnd.nextInt(lastNames.length)];
-        String socialSecurityNumber = socialSecurityNumbers[rnd.nextInt(socialSecurityNumbers.length)];
+    private static SalariedEmployee getMockSalariedEmployee(String firstName, String lastName, String socialSecurityNumber, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         double weeklySalary = rnd.nextDouble() * 3000 + 300; // 300.0 to 3300.0
-        int yearOfBirth = rnd.nextInt(65) + 1940; // 1940 to 2004
-        int monthOfBirth = rnd.nextInt(12);
-        int dayOfBirth = rnd.nextInt(29);
         return new SalariedEmployee(firstName, lastName, socialSecurityNumber, weeklySalary, yearOfBirth, monthOfBirth,
                 dayOfBirth);
     }

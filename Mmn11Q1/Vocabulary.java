@@ -4,6 +4,7 @@ import java.util.Random;
 // It's not meant to be instantiated.
 public final class Vocabulary {
 
+    // auto generated array of random words
     private static final String[] vocabulary = { "judgment", "delicate", "bullet", "admire", "mechanical", "prestige",
             "smooth", "vertical", "haircut", "clay", "fan", "soldier", "stream", "magazine", "pull", "guarantee",
             "goal", "classroom", "cruelty", "sign", "person", "astonishing", "van", "shrink", "late", "teenager",

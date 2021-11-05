@@ -28,6 +28,6 @@ public class BirthDate {
     // return String representation of BirthDate object
     @Override
     public String toString() {
-        return String.format("birthdate: %d.%d.%d", getDay(), getMonth(), getYear());
+        return String.format("birthdate: %d.%d.%d", getDay(), getMonth() + 1, getYear());
     }
 }

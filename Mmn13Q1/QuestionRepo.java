@@ -11,11 +11,9 @@ public class QuestionRepo {
     // constructor. reads the file into the questions and answers ArrayLists.
     public QuestionRepo(String fileName) {
         int counter = 0;
-        Scanner input = null;
         ArrayList<String> questionsList = new ArrayList<String>();
         ArrayList<ArrayList<String>> answersList = new ArrayList<ArrayList<String>>();
-        try {
-            input = new Scanner(new File(fileName));
+        try (Scanner input = new Scanner(new File(fileName))){
             while (input.hasNext()) {
                 String st = input.nextLine();
                 if (counter % NUM_OF_LINES_PER_Q == 0) { // If the line number divides with no remainder, it's aquestion
@@ -29,11 +27,7 @@ public class QuestionRepo {
                 counter++;
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (input != null) {
-                input.close();
-            }
+            this.questions = new Question[0];
         }
         this.questions = new Question[questionsList.size()];
         for (int i = 0; i < this.questions.length; i++) {

@@ -31,12 +31,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text fx:id="answerOne" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Text fx:id="answerTwo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Text fx:id="answerThree" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Text fx:id="answerFour" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Text fx:id="question" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="400.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
-            <Text fx:id="result" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Text fx:id="answerOne" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fx:id="answerTwo" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Text fx:id="answerThree" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text fx:id="answerFour" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Text fx:id="question" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+            <Text fx:id="result" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font></Text>

@@ -3,26 +3,26 @@
 public class Word {
 
     private String word;
-    private boolean[] guessed; // charecters in the chosen word which were guessed
-    private boolean[] guessedChars; // charecters the user tried to guess
-    private int numbOfGuesses;
+    private boolean[] guessed; // characters of the current word which were guessed correctly
+    private boolean[] guessedChars; // characters the user tried to guess
+    private int numbOfGuesses; 
     private static final int NUM_OF_ENGLISH_CHARS = 26;
 
     // Constructor
     public Word(String word) {
-        resetWord(word);
+        newWord(word);
     }
 
-    public void resetWord(String word) {
+    public void newWord(String word) {
         this.word = word;
         this.guessed = new boolean[word.length()];
         this.guessedChars = new boolean[NUM_OF_ENGLISH_CHARS];
         this.numbOfGuesses = 0;
     }
 
-    // Gets a charecter from the user, checks if the word contains it, and marks
+    // Gets a character from the user, checks if the word contains it, and marks
     // it if the guess was correct. Returns true if the user guessed the whole word,
-    // or false if there are still more charecters to guess.
+    // or false if there are still more characters to guess.
     public boolean guess(char c) {
         numbOfGuesses++;
         int numOfCharsGuessed = 0;
@@ -52,7 +52,7 @@ public class Word {
         return numbOfGuesses;
     }
 
-    // Returns the current word, but replaces all of the uncovered charecters with an underscore.
+    // Returns the current word, but replaces all of the uncovered characters with underscores.
     public String getWordWithUnderscores() {
         String wordStatus = "";
         for (int i = 0; i < guessed.length; i++) {
@@ -65,8 +65,9 @@ public class Word {
         return wordStatus;
     }
 
-    // getAvailableCharecters returns a string of all of the available chars
-    public String getAvailableCharecters() {
+    // returns an ordered string of all of the available chars
+    // example: "a c e x z"
+    public String getAvailableCharacters() {
         String available = "";
         for (int i = 0; i < guessedChars.length; i++) {
             if (!guessedChars[i]) {
