@@ -24,7 +24,7 @@ public class DrawShapesController {
     // drawShapesButtonPressed is triggered by a user click on the draw shapes button.
     // It draws 10 shapes with a random shape, color and size.
     @FXML
-    void drawShapesButtonPressed(ActionEvent event) {
+    private void drawShapesButtonPressed(ActionEvent event) {
         double canvasWidth = canvas.getWidth();
         double canvasHeight = canvas.getHeight();
         gc = canvas.getGraphicsContext2D();
