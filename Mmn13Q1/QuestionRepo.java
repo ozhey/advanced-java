@@ -13,7 +13,7 @@ public class QuestionRepo {
         int counter = 0;
         ArrayList<String> questionsList = new ArrayList<String>();
         ArrayList<ArrayList<String>> answersList = new ArrayList<ArrayList<String>>();
-        try (Scanner input = new Scanner(new File(fileName))){
+        try (Scanner input = new Scanner(new File(fileName + ".txt"))){
             while (input.hasNext()) {
                 String st = input.nextLine();
                 if (counter % NUM_OF_LINES_PER_Q == 0) { // If the line number divides with no remainder, it's aquestion

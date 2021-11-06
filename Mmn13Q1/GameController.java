@@ -42,7 +42,7 @@ public class GameController {
     private int MAX_SCORE = 100;
     
     public GameController() {
-        repo = new QuestionRepo("exdam.txt");
+        repo = new QuestionRepo("exam");
         numOfQuestions = repo.getNumOfQuestions();
     }
     
