@@ -11,15 +11,16 @@ public class CalculatorController {
 
 	@FXML
 	private TextArea display;
-	private String operator, text;
+	private String operator;
 	private double prevNum, curNum;
+	private boolean opFlag; // will be true if the last action was an operation
 
 	// constructor
 	public CalculatorController() {
-		text = "";
 		prevNum = 0;
 		curNum = 0;
 		operator = "";
+		opFlag = false;
 	}
 
 	// handleKeyPress routes key presses to the correct function or handles them by
@@ -38,8 +39,7 @@ public class CalculatorController {
 		case "7":
 		case "8":
 		case "9":
-			text += keyText;
-			display.setText(text);
+			executeNumberClick(keyText);
 			break;
 		case "+":
 			executeOperation("add");
@@ -58,82 +58,93 @@ public class CalculatorController {
 			break;
 		case ".":
 			handleComma();
-			display.setText(text);
+			break;
+		case "±":
+			handleChangeSign();
 			break;
 		default:
 			break;
 		}
 	}
 
-	// handleClick handles the numerical and comma buttons. It sets the text
-	// accordingly.
+	// shandles the numerical buttons. It sets the text accordingly.
 	@FXML
-	private void handleClick(Event event) {
+	private void handleNum(Event event) {
 		Button btn = (Button) event.getSource();
 		String btnText = btn.getText();
-		if (btnText.equals(".")) {
-			handleComma();
-		} else {
-			text += btnText;
-		}
-		display.setText(text);
+		executeNumberClick(btnText);
 	}
 
-	// delete resets the calculator's memory and sets the calculator's text to an
-	// empty text
+	// delete resets the calculator's memory and sets the calculator's text to an empty text
 	@FXML
 	private void handleDelete() {
 		display.setText("");
-		text = "";
 		prevNum = 0;
 		curNum = 0;
 		operator = "";
+		opFlag = false;
 	}
 
+	// handles clicks on +-/* buttons
 	@FXML
 	private void handleOperation(Event event) {
 		Button btn = (Button) event.getSource();
 		executeOperation(btn.getId());
 	}
 
-	// executeOperation gets a string representing an operation (+, -, * or /). It
-	// calculates the last result, and only then it changes the current operator.
-	private void executeOperation(String op) {
-		curNum = parseDouble(display.getText());
-		display.setText(getResult());
-		prevNum = parseDouble(display.getText());
-		operator = op;
-		text = "";
-	}
-
-	// handleChangeSign simply changes the sign of the number that's displayed on
-	// screen.
-	// Note: this is the way OSX's calculator works, this is why I implemented it
-	// this way :)
+	// handleChangeSign simply changes the sign of the number that's displayed on screen.
+	// Note: this is the way OSX's calculator works, this is why I implemented it this way :)
 	@FXML
 	private void handleChangeSign() {
 		double number = parseDouble(display.getText());
 		display.setText(fixedNumber(-number));
 	}
-
-	// handleEquals triggers when the user clicks on the '=' button (or with the
-	// keyboard), and displays the result on screen
+	
+	// calculates and displays the result.
 	@FXML
 	private void handleEquals() {
 		curNum = parseDouble(display.getText());
-		display.setText(getResult());
+		display.setText(calcResult());
+		prevNum = parseDouble(display.getText());
 		operator = "";
-		text = "";
+		opFlag = false;
 	}
-
+	
 	// handleComma adds a comma to the current text, unless there's already a comma
 	// (to prevent duplicates)
+	@FXML
 	private void handleComma() {
-		if (text.length() == 0) {
-			text += "0.";
-		} else if (!text.contains(".")) {
-			text += ".";
+		String curText = display.getText();
+		if (opFlag || curText.length() == 0) {
+			display.setText("0.");
+		} else if (!curText.contains(".")) {
+			display.setText(curText + ".");
 		}
+		opFlag = false;
+	}
+	
+	// executeOperation gets a string representing an operation (+, -, * or /). It
+	// calculates the last result, and only then it changes the current operator.
+	private void executeOperation(String op) {
+		if (opFlag) {
+			operator = op;
+		} else {
+			opFlag = true;
+			curNum = parseDouble(display.getText());
+			display.setText(calcResult());
+			prevNum = parseDouble(display.getText());
+			operator = op;
+		}
+	}
+
+	// gets the entered number and sets the display accordingly
+	private void executeNumberClick(String num) {
+		if (opFlag) {
+			display.setText(num);
+		} else {
+			display.setText(display.getText() + num);
+		}
+		opFlag = false;
 	}
 
 	// parseDouble is a wrapper around Double.parseDouble, but it also checks if the
@@ -142,25 +153,25 @@ public class CalculatorController {
 		if (text != null && text.length() > 0) {
 			try {
 				return Double.parseDouble(text);
-			} catch (Exception e) {
+			} catch (NumberFormatException e) {
 				return 0;
 			}
 		}
 		return 0;
 	}
-
-	// getResult computes the result based on the current operator
-	private String getResult() {
+	
+	// calcResult computes the result based on the current operator
+	private String calcResult() {
 		switch (operator) {
-		case "add":
+			case "add":
 			return fixedNumber(prevNum + curNum);
-		case "divide":
+			case "divide":
 			return fixedNumber(prevNum / curNum);
-		case "substract":
+			case "substract":
 			return fixedNumber(prevNum - curNum);
-		case "multiply":
+			case "multiply":
 			return fixedNumber(prevNum * curNum);
-		default:
+			default:
 			return fixedNumber(curNum);
 		}
 	}
