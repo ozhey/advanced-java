@@ -5,35 +5,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text; 
 import java.util.ArrayList;
 
-/**
- * GameController
- */
+// the controller class for the quiz. 
 public class GameController {
 
-    @FXML
-    private Text question;
-    @FXML
-    private Text answerOne;
-    @FXML
-    private Text answerTwo;
-    @FXML
-    private Text answerThree;
-    @FXML
-    private Text answerFour;
-    @FXML
-    private Button btnOne;
-    @FXML
-    private Button btnTwo;
-    @FXML
-    private Button btnThree;
-    @FXML
-    private Button btnFour;
-    @FXML    
-    private Text result;
-    @FXML
-    private Button next;
+    @FXML private Text question;
+    @FXML private Text answerOne;
+    @FXML private Text answerTwo;
+    @FXML private Text answerThree;
+    @FXML private Text answerFour;
+    @FXML private Button btnOne;
+    @FXML private Button btnThree;
+    @FXML private Button btnTwo;
+    @FXML private Button btnFour;
+    @FXML private Text result;
+    @FXML private Button next;
     private Text[] answersText; // an array of 4 text elements that contain the answers
-    
     private QuestionRepo repo;
     private int numOfQuestions;
     private int currQuestionNum;
