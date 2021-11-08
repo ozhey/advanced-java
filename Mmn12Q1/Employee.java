@@ -1,3 +1,5 @@
+import java.util.Calendar;
+
 // Represents an employee in the factory. 
 public abstract class Employee {
 
@@ -41,8 +43,16 @@ public abstract class Employee {
    // return String representation of Employee object
    @Override
    public String toString() {
-      return String.format("%s %s%nsocial security number: %s%n%s", getFirstName(), getLastName(),
-            getSocialSecurityNumber(), getBirthDate().toString());
+      int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+      String earnings;
+      if (getBirthDateMonth() == currentMonth) {
+         earnings = "Salary: $" + (earnings() + 200) 
+             + ". Earned extra 200$ because he/she has a birthday this month!";
+     } else {
+         earnings = "Salary: $" + earnings();
+     }
+      return String.format("%s %s%nsocial security number: %s%n%s%n%s", getFirstName(), getLastName(),
+            getSocialSecurityNumber(), getBirthDate().toString(), earnings);
    }
 
    // abstract method must be overridden by concrete subclasses
