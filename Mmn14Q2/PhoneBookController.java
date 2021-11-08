@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 
-public class AddressBookController {
+public class PhoneBookController {
     
     @FXML private TableView<Map.Entry<String, String>> table;
     @FXML private TableColumn<Map.Entry<String, String>, String> nameCol;
@@ -34,9 +33,9 @@ public class AddressBookController {
     @FXML private TextField fileNameSave;
     private Alert error;
     private Alert info;
-    private AddressBook addressBook;
-    public AddressBookController() {
-        addressBook = new AddressBook();
+    private PhoneBook phoneBook;
+    public PhoneBookController() {
+        phoneBook = new PhoneBook();
         error = new Alert(AlertType.ERROR);
         info = new Alert(AlertType.INFORMATION);
     }
@@ -51,67 +50,73 @@ public class AddressBookController {
     @FXML
     private void add() {
         try {
-            addressBook.add(addName.getText(), addPhone.getText());
+            phoneBook.add(addName.getText(), addPhone.getText());
         } catch (DuplicateContactException | InvalidPhoneNumException e) {
             error.setContentText(e.getMessage());
             error.show();
         }
-        viewAddressBook();
+        viewPhoneBook();
         addName.setText("");
         addPhone.setText("");
     }
     
+    // deletes a contact from the phone book
     @FXML
     private void delete() {
         try {
-            addressBook.delete(deleteName.getText());
+            phoneBook.delete(deleteName.getText());
         } catch (ContactNotFoundException e) {
             error.setContentText(e.getMessage());
             error.show();
         }
-        viewAddressBook();
+        viewPhoneBook();
         deleteName.setText("");
     }
     
+    // updates a contact in the phone  book
     @FXML 
     private void update() {
         try {
-            addressBook.update(updateName.getText(), updatePhone.getText());
+            phoneBook.update(updateName.getText(), updatePhone.getText());
         } catch (ContactNotFoundException | InvalidPhoneNumException e) {
             error.setContentText(e.getMessage());
             error.show();
         }
-        viewAddressBook();
+        viewPhoneBook();
         updateName.setText("");
         updatePhone.setText("");
     }
 
+    // searches for a contact and shows him in the table if he was found.
     @FXML
     private void search() {
         table.getItems().clear();
-        table.getItems().addAll(addressBook.search(searchName.getText()).entrySet());
+        table.getItems().addAll(phoneBook.search(searchName.getText()).entrySet());
     }
 
+    // clears the search box and shows the phone  book with no filters
     @FXML
     private void clear() {
         searchName.setText("");
-        viewAddressBook();
+        viewPhoneBook();
     }
 
+    // show the updated phone book in the table view
     @FXML 
-    private void viewAddressBook() {
+    private void viewPhoneBook() {
         table.getItems().clear();
-        table.getItems().addAll(addressBook.getAddressBook().entrySet());
+        table.getItems().addAll(phoneBook.getPhoneBook().entrySet());
     }
 
+    // saves the current phone  book to a file.
     @FXML
     private void saveToFile() {
         File f = new File(fileNameSave.getText());
         try {
             ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(f));
-            objOut.writeObject(addressBook);
+            objOut.writeObject(phoneBook);
             objOut.close();
-            info.setContentText("Saved address book under the name " + fileNameSave.getText() + " in the project's directory");
+            info.setContentText("Saved phone  book under the name " + fileNameSave.getText() + " in the project's directory");
             info.show();
         } catch (IOException e) {
             error.setContentText(e.getMessage());
@@ -120,11 +125,12 @@ public class AddressBookController {
         fileNameSave.setText("");
     }
 
+    // loads an phone  book from a file. 
     @FXML 
     private void loadFromFile() {
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileNameLoad.getText()));
-            addressBook.setAddressBook((AddressBook) in.readObject());
+            phoneBook.setPhoneBook((PhoneBook) in.readObject());
             in.close();
         } catch (IOException e) {
             error.setContentText(e.getMessage());
@@ -133,7 +139,7 @@ public class AddressBookController {
             error.setContentText(e.getMessage());
             error.show();
         }
-        viewAddressBook();
+        viewPhoneBook();
         fileNameLoad.setText("");
     }
     
