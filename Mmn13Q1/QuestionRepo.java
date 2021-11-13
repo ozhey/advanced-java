@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// QuestionRepo reads a file and constructs a list of questions.
 public class QuestionRepo {
 
     private static final int NUM_OF_LINES_PER_Q = 5; // every question consists of 5 lines - 1 question and 4 answers
@@ -16,13 +17,13 @@ public class QuestionRepo {
         try (Scanner input = new Scanner(new File(fileName + ".txt"))){
             while (input.hasNext()) {
                 String st = input.nextLine();
-                if (counter % NUM_OF_LINES_PER_Q == 0) { // If the line number divides with no remainder, it's aquestion
+                if (counter % NUM_OF_LINES_PER_Q == 0) { // If the line number divides with no remainder, it's a question
                     questionsList.add(st);
                 } else {
                     if (counter % NUM_OF_LINES_PER_Q == 1) { // If the line number divides with a remainder of 1, it's the first answer for the question
                         answersList.add(new ArrayList<String>());
                     }
-                    answersList.get(counter / NUM_OF_LINES_PER_Q).add(st); // Add the answer at the correct position
+                    answersList.get(counter / NUM_OF_LINES_PER_Q).add(st); // Add the answer to the corresponding question
                 }
                 counter++;
             }
