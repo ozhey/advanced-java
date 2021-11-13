@@ -17,7 +17,6 @@ public class LifeMatrix {
                 }
             }
         }
-
     }
 
     // Get the matrix

@@ -34,7 +34,7 @@ public final class MockData {
         SALARIED
     }
 
-    private static final EmployeeType[] employeeTypes = EmployeeType.values();
+    private static final EmployeeType[] employeeTypes = EmployeeType.values(); // [BASE_PLUS_COMMISSION, COMMISSION, HOURLY, ...]
 
     private static final Random rnd = new Random();
 
