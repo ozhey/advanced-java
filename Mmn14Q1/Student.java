@@ -1,3 +1,4 @@
+// student class represents a student by name, id and birthyear
 public class Student implements Comparable<Student> {
     
     private String firstName;
@@ -5,6 +6,7 @@ public class Student implements Comparable<Student> {
     private String id;
     private String birthYear;
     
+    // constructor
     public Student(String firstName, String lastName, String id, String birthYear) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -12,6 +14,7 @@ public class Student implements Comparable<Student> {
         this.birthYear = birthYear;
     }
 
+    // the compare method for student. it performs a lexical comparison on the id field
     @Override
     public int compareTo(Student student) {
         return id.compareTo(student.id);
