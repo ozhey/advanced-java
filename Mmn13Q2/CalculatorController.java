@@ -5,26 +5,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 
 // CalculatorController contains all the logic of the Calculator and the interaction with the GUI.
-// The calculator's logic is based on Apple's OSX basic calculator and follows the rules of the assignment.
-// It computes the result on every operation (so it can't help with operator precedence).
+// The calculator's logic is based on Apple's macOS basic calculator and follows the rules of the assignment.
+// It computes the result on every operation, so it doesn't help with operator precedence.
 public class CalculatorController {
 
 	@FXML
 	private TextArea display;
-	private String operator;
-	private double prevNum, curNum;
-	private boolean opFlag; // will be true if the last action was an operation
+	private String operator = "";
+	private double prevNum = 0, curNum = 0;
+	private boolean opFlag = false; // will be true if the last action was an operation
 
-	// constructor
-	public CalculatorController() {
-		prevNum = 0;
-		curNum = 0;
-		operator = "";
-		opFlag = false;
-	}
-
-	// handleKeyPress routes key presses to the correct function or handles them by
-	// itself (numbers).
+	// handleKeyPress routes key presses to the corresponding function
 	@FXML
 	private void handleKeyPress(KeyEvent key) {
 		String keyText = key.getText();
