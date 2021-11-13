@@ -4,14 +4,11 @@ import Exceptions.ContactNotFoundException;
 import Exceptions.DuplicateContactException;
 import Exceptions.InvalidPhoneNumException;
 
+// the logic class for the phonebook application. 
+// implements Serializable so it can later be saved / loaded from a file
 public class PhoneBook implements Serializable {
 
-    private TreeMap<String, String> phoneBook; // <key: fullname, value: phonenumber>
-
-    // constructor
-    public PhoneBook() {
-        phoneBook = new TreeMap<String,String>();
-    }
+    private TreeMap<String, String> phoneBook = new TreeMap<String, String>(); // <key: fullname, value: phonenumber>
 
     // replaces the current phonebook with a new one. 
     // main use case is loading a phonebook from a file into memory.
@@ -19,12 +16,12 @@ public class PhoneBook implements Serializable {
         this.phoneBook = phoneBook.getPhoneBook();
     }
 
-    // adds a contact to the phone book
+    // adds a contact to the phone book. I didn't put any constrainsts on the contact's name.
     public void add(String name, String phoneNumber) throws DuplicateContactException, InvalidPhoneNumException {
         if (phoneBook.containsKey(name)) {
             throw new DuplicateContactException("A contact with the name " + name + " already exists");
         } else if (!validatePhoneNum(phoneNumber)) {
-            throw new InvalidPhoneNumException(phoneNumber + " is not a valid phone number");
+            throw new InvalidPhoneNumException("Phone numbers must contain exactly 10 digits.");
         }
         phoneBook.put(name, phoneNumber);
     }
@@ -34,7 +31,7 @@ public class PhoneBook implements Serializable {
         if (!phoneBook.containsKey(name)) {
             throw new ContactNotFoundException("A contact with the name " + name + " does not exist");
         } else if (!validatePhoneNum(phoneNumber)) {
-            throw new InvalidPhoneNumException(phoneNumber + " is not a valid phone number");
+            throw new InvalidPhoneNumException("Phone numbers must contain exactly 10 digits.");
         }
         phoneBook.put(name, phoneNumber);
     }

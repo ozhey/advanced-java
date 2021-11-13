@@ -17,7 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
-
+// the controller for the phonebook GUI
 public class PhoneBookController {
     
     @FXML private TableView<Map.Entry<String, String>> table;
