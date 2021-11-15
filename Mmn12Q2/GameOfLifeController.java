@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 
 // Controller for Game of Life.
+// There's no option to restart the game because there's no requirement to implement it :-)
 public class GameOfLifeController {
 
     @FXML
@@ -16,11 +17,12 @@ public class GameOfLifeController {
     private GraphicsContext gc;
     private static final int MATRIX_SIZE = 10;
 
-    // Runs right after the root element has been completely processed. Sets the squars's color.
+    // Runs right after the root element has been completely processed. Sets the square's color.
     @FXML
     public void initialize() {
         gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.GREEN);
+        gc.setFill(Color.DARKOLIVEGREEN);
+        gc.setLineWidth(0.1); // make the strokes less visible
     }
 
     // Moves the life matrix to the next generation and then draws it on the canvas.
@@ -44,12 +46,14 @@ public class GameOfLifeController {
         double canvasHeight = canvas.getHeight();
         for (int i = 0; i < MATRIX_SIZE; i++) {
             for (int j = 0; j < MATRIX_SIZE; j++) {
+                double x = i / (double) MATRIX_SIZE * canvasWidth;
+                double y = j / (double) MATRIX_SIZE * canvasHeight;
+                double w = canvasWidth / MATRIX_SIZE;
+                double h = canvasHeight / MATRIX_SIZE;
                 if (matrix[i][j]) {
-                    double x = i / (double) MATRIX_SIZE * canvasWidth;
-                    double y = j / (double) MATRIX_SIZE * canvasHeight;
-                    double width = canvasWidth / MATRIX_SIZE;
-                    double height = canvasHeight / MATRIX_SIZE;
-                    gc.fillRect(x, y, width, height);
+                    gc.fillRect(x, y, w, h);
+                } else {
+                    gc.strokeRect(x, y, w, h);
                 }
             }
         }
