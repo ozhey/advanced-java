@@ -32,10 +32,12 @@ public abstract class Employee {
       return socialSecurityNumber;
    }
 
+   // get birthdate
    public BirthDate getBirthDate() {
       return birthDate;
    }
 
+   // get month of birth
    public int getBirthDateMonth() {
       return birthDate.getMonth();
    }
