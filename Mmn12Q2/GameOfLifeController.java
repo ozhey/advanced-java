@@ -22,7 +22,7 @@ public class GameOfLifeController {
     public void initialize() {
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.DARKOLIVEGREEN);
-        gc.setLineWidth(0.1); // make the strokes less visible
+        gc.setLineWidth(0.2); // make the strokes less visible
     }
 
     // Moves the life matrix to the next generation and then draws it on the canvas.
@@ -52,9 +52,8 @@ public class GameOfLifeController {
                 double h = canvasHeight / MATRIX_SIZE;
                 if (matrix[i][j]) {
                     gc.fillRect(x, y, w, h);
-                } else {
-                    gc.strokeRect(x, y, w, h);
                 }
+                gc.strokeRect(x, y, w, h);
             }
         }
     }
