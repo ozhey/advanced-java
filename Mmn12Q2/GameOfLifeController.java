@@ -4,40 +4,45 @@ import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 
-// Controller for Game of Life.
-// There's no option to restart the game because there's no requirement to implement it :-)
+// controller for Game of Life.
+// there's no option to restart the game because there's no requirement to implement it :-)
 public class GameOfLifeController {
 
     @FXML
     private Canvas canvas;
     @FXML
-    private Button button;
+    private Button nextGenButton;
 
     private LifeMatrix lifeMatrix;
     private GraphicsContext gc;
     private static final int MATRIX_SIZE = 10;
 
-    // Runs right after the root element has been completely processed. Sets the square's color.
+
+    // runs right after the root element has been completely processed. Sets the square's color.
     @FXML
     public void initialize() {
+        lifeMatrix = new LifeMatrix(MATRIX_SIZE); // init empty matrix
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.DARKOLIVEGREEN);
         gc.setLineWidth(0.2); // make the strokes less visible
     }
 
-    // Moves the life matrix to the next generation and then draws it on the canvas.
+    // moves the life matrix to the next generation and then draws it on the canvas.
     @FXML
     private void nextGen() {
-        if (button.getText().equals("Start Game")) {
-            lifeMatrix = new LifeMatrix(MATRIX_SIZE);
-            button.setText("Next Generation");
-        } else {
-            lifeMatrix.nextGen();
-        }
+        lifeMatrix.nextGen();
         drawLifeMatrix();
     }
 
-    // Draws the given life matrix on the canvas
+    // creates a new life matrix and draws it on the canvas
+    @FXML
+    private void NewGame() {
+        lifeMatrix.newMatrix(MATRIX_SIZE);
+        drawLifeMatrix();
+        nextGenButton.setDisable(false);
+    }
+
+    // draws the given life matrix on the canvas
     private void drawLifeMatrix() {
         gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

@@ -1,30 +1,36 @@
 import java.util.Random;
 
-// LifeMatrix uses a 2D boolean array to implement the logic for Conway's Game of Life game.
+// lifeMatrix uses a 2D boolean array to implement the logic for Conway's Game of Life game.
 public class LifeMatrix {
 
     private boolean[][] lifeMatrix;
     private static final Random rnd = new Random();
-    private static final double CHANCE_FOR_LIFE = 0.4; // Defines the chance for life in every cell in a new life matrix.
+    private static final double CHANCE_FOR_LIFE = 0.4; // Defines the chance for life in the cells in a new life matrix.
 
-    // Constructor. Initializes a random life matrix.
+    // constructor. Initializes an empty life matrix.
     public LifeMatrix(int matrixSize) {
-        this.lifeMatrix = new boolean[matrixSize][matrixSize];
+        lifeMatrix = new boolean[matrixSize][matrixSize];
+    }
+
+    // fills the life matrix with random boolean values
+    public void newMatrix(int matrixSize) {
         for (int i = 0; i < lifeMatrix.length; i++) {
             for (int j = 0; j < lifeMatrix[0].length; j++) {
                 if (rnd.nextDouble() < CHANCE_FOR_LIFE) {
                     lifeMatrix[i][j] = true;
+                } else {
+                    lifeMatrix[i][j] = false;
                 }
             }
         }
     }
 
-    // Get the matrix
+    // get the matrix
     public boolean[][] getMatrix() {
         return lifeMatrix;
     }
 
-    // Moves the life matrix to the next generation as defined by Conway's Game of Life's game rules.
+    // moves the life matrix to the next generation as defined by Conway's Game of Life's game rules.
     public void nextGen() {
         boolean[][] newLifeMatrix = new boolean[lifeMatrix.length][lifeMatrix[0].length];
         for (int i = 0; i < lifeMatrix.length; i++) {
@@ -43,7 +49,7 @@ public class LifeMatrix {
         lifeMatrix = newLifeMatrix;
     }
 
-    // Gets coordinates in the matrix and return the number of the living neighbours.
+    // gets coordinates in the matrix and return the number of the living neighbours.
     private int getNumOfAliveNeighbours(int x, int y) {
         int numOfAlive = 0;
         int rowStart = Math.max(x - 1, 0);
