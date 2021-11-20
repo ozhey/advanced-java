@@ -1,0 +1,4 @@
+Tel Aviv:Today will be 28 Celsius and sunny. Tommorrow will be a little colder and there will be some clouds. After Tommorrow the temperatures will drop to around 18 Celsius and there will be some rain.
+London:Today will be sunny but the temperatures will be very low at around -5 Celsius. Tommorrow will be a little warmer and still sunny. After tommorrow will be cold again and there will be some snow too.
+Paris:Today will be very cold and cloudy. Tommorrow the sun will shine and the temperatures will rise to 22 Celsius. After Tommorrow will be cloudy again and the temperatures will drop to 10 Celsius.
+Prague:Today will be very hot and windy, the temperatures might get to 35 Celsius. Tommorrow will be dry and hot as well, with the temperateres topping at 37 Celsius. After tommorrow the heat will break and it will be a nice sunny day, the temperatures are expected to be around 25 Celsius.
