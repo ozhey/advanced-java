@@ -20,7 +20,7 @@ public class GameOfLifeController {
 
     // runs right after the root element has been completely processed. Sets the square's color.
     @FXML
-    public void initialize() {
+    private void initialize() {
         lifeMatrix = new LifeMatrix(MATRIX_SIZE); // init empty matrix
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.DARKOLIVEGREEN);
