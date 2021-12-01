@@ -11,10 +11,10 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PhoneBookController">
    <center>
-      <TableView fx:id="table" maxWidth="-Infinity" onSort="#add" prefHeight="116.0" prefWidth="580.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" maxWidth="-Infinity" prefHeight="116.0" prefWidth="580.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="nameCol" prefWidth="290.0" text="Name" />
-          <TableColumn fx:id="phoneCol" prefWidth="290.0" text="Phone Number" />
+          <TableColumn fx:id="nameCol" maxWidth="290.0" prefWidth="290.0" resizable="false" text="Name" />
+          <TableColumn fx:id="phoneCol" maxWidth="290.0" prefWidth="290.0" resizable="false" text="Phone Number" />
         </columns>
       </TableView>
    </center>
@@ -80,8 +80,14 @@
                      </HBox.margin>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
       </VBox>
    </bottom>
    <top>

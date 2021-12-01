@@ -7,13 +7,18 @@ import Exceptions.InvalidPhoneNumException;
 // the logic class for the phonebook application. 
 // implements Serializable so it can later be saved / loaded from a file
 public class PhoneBook implements Serializable {
-
+    
     private TreeMap<String, String> phoneBook = new TreeMap<String, String>(); // <key: fullname, value: phonenumber>
-
+    
     // replaces the current phonebook with a new one. 
     // main use case is loading a phonebook from a file into memory.
     public void setPhoneBook(PhoneBook phoneBook) {
         this.phoneBook = phoneBook.getPhoneBook();
+    }
+    
+    // returns the phonebook
+    public TreeMap<String, String> getPhoneBook() {
+        return phoneBook;
     }
 
     // adds a contact to the phone book. I didn't put any constrainsts on the contact's name.
@@ -52,11 +57,6 @@ public class PhoneBook implements Serializable {
             return new TreeMap<String,String>();
         }
         return new TreeMap<String, String>() {{put(name, phoneBook.get(name));}};
-    }
-
-    // returns the phonebook
-    public TreeMap<String, String> getPhoneBook() {
-        return phoneBook;
     }
 
     // validates that the phone number has exactly 10 digits which are all numbers

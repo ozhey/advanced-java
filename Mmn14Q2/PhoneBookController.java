@@ -34,6 +34,8 @@ public class PhoneBookController {
     private Alert error;
     private Alert info;
     private PhoneBook phoneBook;
+
+    // constructor. inits the phone book and creates alerts
     public PhoneBookController() {
         phoneBook = new PhoneBook();
         error = new Alert(AlertType.ERROR);
@@ -47,6 +49,7 @@ public class PhoneBookController {
         phoneCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue()));
     }
     
+    // adds a contact to the phone book
     @FXML
     private void add() {
         try {
