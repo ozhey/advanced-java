@@ -3,15 +3,14 @@ import java.util.Collections;
 
 // question represents a question in the quiz.
 public class Question {
-    
+
     private String question;
     private ArrayList<String> possibleAnswers;
     private String correctAnswer;
-    
+
     public Question(String question, ArrayList<String> answers) {
         this.question = question;
         this.correctAnswer = answers.get(0); // the first answer is always the correct one
-        Collections.shuffle(answers); // randomize the order of the questions
         this.possibleAnswers = answers;
     }
 
@@ -22,6 +21,7 @@ public class Question {
 
     // get the list of possible answers
     public ArrayList<String> getAnswers() {
+        Collections.shuffle(possibleAnswers); // randomize the order of the questions
         return possibleAnswers;
     }
 

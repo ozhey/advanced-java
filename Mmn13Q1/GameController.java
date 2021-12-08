@@ -2,7 +2,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text; 
+import javafx.scene.text.Text;
 import java.util.ArrayList;
 
 // the controller class for the quiz. 
@@ -20,33 +20,34 @@ public class GameController {
     @FXML private Text result;
     @FXML private Button next;
     private Text[] answersText; // an array of 4 text elements that contain the answers
-    private QuestionRepo repo;
-    private int numOfQuestions;
-    private int currQuestionNum;
-    private Question currQuestion;
-    private double score;
-    private int MAX_SCORE = 100;
-    
+    private Game game;
+
     public GameController() {
-        repo = new QuestionRepo("exam");
-        numOfQuestions = repo.getNumOfQuestions();
+        game = new Game("exam");
     }
-    
-    // starts the game - sets the current question to one and loads it.
+
+    // initializes the game and starts it
     @FXML
     private void initialize() {
-        currQuestionNum = 0;
-        score = 0;
-        result.setText("");
-        answersText = new Text[] {answerOne, answerTwo, answerThree, answerFour};
-        if (numOfQuestions == 0) { 
+        answersText = new Text[] { answerOne, answerTwo, answerThree, answerFour };
+        if (game.hasQuestions()) {
+            result.setText("");
+            loadQuestion();
+        } else {
             disableAnsBtns();
             next.setDisable(true);
             question.setFill(Color.RED);
             question.setText("Error: the questions file wasn't found or did not contain any questions");
-        } else {
-            loadQuestion();
         }
+    }
+
+    // starts the game and sets the current question to 0
+    private void restartGame() {
+        game.restart();
+        enableAnsBtns();
+        next.setText("Next Question");
+        result.setText("");
+        loadQuestion();
     }
 
     // gets the user's answer.
@@ -56,60 +57,57 @@ public class GameController {
         String id = btn.getId();
         switch (id) {
             case "btnOne":
-                showResult(answerOne.getText());
+                submitAnswer(answerOne.getText());
                 break;
             case "btnTwo":
-                showResult(answerTwo.getText());
+                submitAnswer(answerTwo.getText());
                 break;
             case "btnThree":
-                showResult(answerThree.getText());
+                submitAnswer(answerThree.getText());
                 break;
             case "btnFour":
-                showResult(answerFour.getText());
+                submitAnswer(answerFour.getText());
                 break;
             default:
                 break;
         }
         disableAnsBtns();
     }
-    
-    // shows the next question, or the result of the game if there are no more questions.
+
+    // loads the next question, or the result if there are no more questions.
     @FXML
     private void handleNext() {
-        currQuestionNum++;
+        game.nextQuestion();
         if (next.getText().equals("End Quiz")) {
             result.setFill(Color.BLACK);
-            result.setText("Your result is: " + String.format ("%.1f",score));
+            result.setText("Your result is: " + String.format("%.1f", game.getScore()));
             next.setText("Start a New Game");
-        } else if (currQuestionNum < numOfQuestions) {
-            if (currQuestionNum == numOfQuestions - 1) {
+        } else if (next.getText().equals("Start a New Game")) {
+            restartGame();
+        } else {
+            if (game.isLastQuestion()) {
                 next.setText("End Quiz");
             }
             loadQuestion();
             enableAnsBtns();
             result.setText("");
-        } else if (next.getText().equals("Start a New Game")) {
-            initialize();
         }
     }
 
-    
     // loads the current question to the screen
     private void loadQuestion() {
-        currQuestion = repo.getQuestion(currQuestionNum);
-        question.setText("Question: " + currQuestion.getQuestion());
-        ArrayList<String> answers = currQuestion.getAnswers();
+        question.setText("Question: " + game.getQuestion());
+        ArrayList<String> answers = game.getPossibleAnswers();
         for (int i = 0; i < answersText.length; i++) {
             answersText[i].setText(answers.get(i));
         }
     }
 
     // gets an answer and prints to the user if the answer was correct or not.
-    private void showResult(String answer) {
-        if (answer.equals(currQuestion.getCorrectAnswer())) {
+    private void submitAnswer(String answer) {
+        if (game.submitAnswer(answer)) {
             result.setFill(Color.GREEN);
             result.setText("Correct!");
-            score += (double) MAX_SCORE / numOfQuestions;
         } else {
             result.setFill(Color.RED);
             result.setText("Wrong!");
@@ -131,5 +129,4 @@ public class GameController {
         btnThree.setDisable(false);
         btnFour.setDisable(false);
     }
- 
 }
