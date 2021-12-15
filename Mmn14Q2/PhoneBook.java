@@ -51,7 +51,6 @@ public class PhoneBook implements Serializable {
 
     // searches for a contact in the phone book.
     // returns a treemap so it's easy to insert to the table view.
-    // doesn't throw ContactNotFoundException because it's ok to search for non-existing contacts.
     public TreeMap<String, String> search(String name) {
         if (!phoneBook.containsKey(name)) {
             return new TreeMap<String,String>();

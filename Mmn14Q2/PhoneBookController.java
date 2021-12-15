@@ -119,7 +119,7 @@ public class PhoneBookController {
             ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream(f));
             objOut.writeObject(phoneBook);
             objOut.close();
-            info.setContentText("Saved phone  book under the name " + fileNameSave.getText() + " in the project's directory");
+            info.setContentText("Saved phone book under the name " + fileNameSave.getText() + " in the project's directory");
             info.show();
         } catch (IOException e) {
             error.setContentText(e.getMessage());
