@@ -75,7 +75,7 @@ public class AirPort {
         runways[runwayNum] = false;
     }
 
-    // looks for an available runway and returns it
+    // looks for an available runway and returns it, or -1 if no runway is available
     private synchronized int availableRunway() {
         for (int i = 0; i < runways.length; i++) {
             if (!runways[i]) {
@@ -84,7 +84,7 @@ public class AirPort {
             }
         }
         // should never happen, we only call this method when there are available runways
-        return 0; // error
+        return -1;
     }
 
 }
