@@ -16,15 +16,11 @@ public class Main {
         n = getIntFromInput(scan);
         scan.close();
         int[] array = rnd.ints(n, MIN_NUMBER, MAX_NUMBER).toArray();
-        long start = System.currentTimeMillis();
         MergeSort merger = new MergeSort(array, m);
         for (int i = 0; i < m; i++) {
             new MergeThread(merger).start();
         }
-        long finish = System.currentTimeMillis();
-        long timeElapsed = finish - start;
         System.out.println(merger.getResult());
-        System.out.println("The computation took " + timeElapsed + "milliseconds");
     }
 
     // gets an integer from the user, safely
