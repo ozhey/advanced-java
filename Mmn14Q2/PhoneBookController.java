@@ -42,6 +42,7 @@ public class PhoneBookController {
         info = new Alert(AlertType.INFORMATION);
     }
 
+    // initializer. instructs the name and phonenumber collumns how to extract the data from the phonebook
     @FXML
     private void initialize() {
         table.setPlaceholder(new Label("There are no contacts to view"));
@@ -111,7 +112,7 @@ public class PhoneBookController {
         table.getItems().addAll(phoneBook.getPhoneBook().entrySet());
     }
 
-    // saves the current phone  book to a file.
+    // saves the current phone book to a file.
     @FXML
     private void saveToFile() {
         File f = new File(fileNameSave.getText());
@@ -128,7 +129,7 @@ public class PhoneBookController {
         fileNameSave.setText("");
     }
 
-    // loads an phone  book from a file. 
+    // loads an phone book from a file. 
     @FXML 
     private void loadFromFile() {
         try {
