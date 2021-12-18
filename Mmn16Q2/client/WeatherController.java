@@ -33,7 +33,6 @@ public class WeatherController {
     @FXML
     private void showWeather() {
         executeRequest("show");
-
     }
 
     // asks the server to reload the weather forecast
