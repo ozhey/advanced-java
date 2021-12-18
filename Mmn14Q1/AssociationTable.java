@@ -44,11 +44,11 @@ public class AssociationTable<K extends Comparable<K>, V> {
     // gets a key. if the key exists, it removes it from the table and returns true
     // otherwise it does nothing and returns false
     public boolean remove(K key) {
-        V value = treemap.remove(key);
-        if (value != null) {
-            return true;
+        if (!this.contains(key)) {
+            return false;
         }
-        return false;
+        treemap.remove(key);
+        return true;
     }
 
     // returns the size (number of key-value pairs) of the table
