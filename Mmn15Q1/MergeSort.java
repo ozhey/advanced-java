@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // MergeSort intent is to sort an array with the merge sort algorithm using multi-threading
 public class MergeSort {
@@ -7,12 +8,11 @@ public class MergeSort {
     private int maxThreads, waiting;
     private boolean done;
 
-    // constructor. creates the repo with m threads and n arrays
+    // constructor. 
     public MergeSort(int[] arr, int m) {
-        lists = new ArrayList<ArrayList<Integer>>();
+        lists = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
-            lists.add(new ArrayList<Integer>());
-            lists.get(i).add(arr[i]);
+            lists.add(new ArrayList<Integer>(Arrays.asList(arr[i])));
         }
         done = false;
         waiting = 0;
@@ -20,6 +20,7 @@ public class MergeSort {
     }
 
     // removes two lists, merges them and returns the merged list
+    // when the merging is finished, it notifies all threads
     public synchronized ArrayList<ArrayList<Integer>> removeCouple() {
         while (lists.size() <= 1 && !done) {
             if (waiting < maxThreads - 1) {

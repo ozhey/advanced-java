@@ -6,15 +6,14 @@ public class Main {
 
     public static void main(String[] args) {
         Random rnd = new Random();
-        AirPort telAviv = new AirPort("Tel Aviv");
-        AirPort losAngeles = new AirPort("Los Angeles");
+        AirPort tlvAirPort = new AirPort("Tel Aviv");
+        AirPort laAirPort = new AirPort("Los Angeles");
         for (int i = 1; i <= NUM_OF_FLIGHTS; i++) {
-            if (rnd.nextBoolean()) {
-                new Flight(i, telAviv, losAngeles).start();
+            if (rnd.nextBoolean()) { // randomly choose the direction of the flight
+                new Flight(i, tlvAirPort, laAirPort).start();
             } else {
-                new Flight(i, losAngeles, telAviv).start();
+                new Flight(i, laAirPort, tlvAirPort).start();
             }
         }
     }
-
 }

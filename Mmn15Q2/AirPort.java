@@ -3,19 +3,18 @@ import java.util.Queue;
 import java.util.Random;
 
 // an airport allows flights to depart or land at one of it's runways.
-// it also 
 public class AirPort {
 
     private static final int NUM_OF_RUNWAYS = 3;
     private final String name;
-    private Queue<Integer> queue;
+    private Queue<Integer> flightsQueue; 
     private int runwaysInUse;
-    private boolean[] runways;
+    private boolean[] runways; // true if a runway is occupied or false if it's free
     private Random rnd = new Random();
 
     // constructor
     public AirPort(String name) {
-        queue = new PriorityQueue<Integer>();
+        flightsQueue = new PriorityQueue<>();
         runwaysInUse = 0;
         runways = new boolean[NUM_OF_RUNWAYS];
         this.name = name;
@@ -55,15 +54,15 @@ public class AirPort {
 
     // starts a departure or landing procedure and occupies the runway
     private synchronized int startProcedure(int flightNumber) {
-        queue.add(flightNumber);
-        while (runwaysInUse == NUM_OF_RUNWAYS || queue.peek() != flightNumber) {
+        flightsQueue.add(flightNumber);
+        while (runwaysInUse == NUM_OF_RUNWAYS || flightsQueue.peek() != flightNumber) {
             System.out.println("Flight number " + flightNumber + " doesn't have a free runway, and is waiting :(");
             try {
                 wait();
             } catch (InterruptedException e) {
             }
         }
-        queue.remove();
+        flightsQueue.remove();
         runwaysInUse++;
         return availableRunway();
     }
@@ -71,8 +70,8 @@ public class AirPort {
     // finishes a departure or landing procedure and frees the runway
     private synchronized void finishProcedure(int flightNumber, int runwayNum) {
         runwaysInUse--;
-        notifyAll();
         runways[runwayNum] = false;
+        notifyAll();
     }
 
     // looks for an available runway and returns it, or -1 if no runway is available
