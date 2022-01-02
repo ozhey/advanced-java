@@ -21,6 +21,7 @@ public class WeatherController {
     private Text weatherText;
     @FXML
     private TextField compName;
+    private final int PORT = 8080;
 
     // initializes the choicebox's options
     @FXML
@@ -66,7 +67,7 @@ public class WeatherController {
     private void sendToServer(DatagramSocket socket, InetAddress ip, String msg) {
         byte[] data = new byte[1024];
         data = msg.getBytes();
-        DatagramPacket packet = new DatagramPacket(data, data.length, ip, 8080);
+        DatagramPacket packet = new DatagramPacket(data, data.length, ip, PORT);
         try {
             socket.send(packet);
         } catch (IOException e) {
