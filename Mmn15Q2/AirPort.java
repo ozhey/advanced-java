@@ -32,7 +32,7 @@ public class AirPort {
         }
         System.out.println("Flight number " + flightNumber + " has departed from airport " + name + ", runway number "
                 + (runwayNum + 1));
-        finishProcedure(flightNumber, runwayNum);
+        freeRunway(runwayNum);
     }
 
     // landing procedure for a specific flight
@@ -49,7 +49,7 @@ public class AirPort {
         }
         System.out.println("Flight number " + flightNumber + " has landed at airport " + name + ", runway number "
                 + (runwayNum + 1));
-        finishProcedure(flightNumber, runwayNum);
+        freeRunway(runwayNum);
     }
 
     // starts a departure or landing procedure and occupies the runway
@@ -68,7 +68,7 @@ public class AirPort {
     }
 
     // finishes a departure or landing procedure and frees the runway
-    private synchronized void finishProcedure(int flightNumber, int runwayNum) {
+    private synchronized void freeRunway(int runwayNum) {
         runwaysInUse--;
         runways[runwayNum] = false;
         notifyAll();
