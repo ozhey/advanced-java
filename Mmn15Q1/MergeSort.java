@@ -11,8 +11,8 @@ public class MergeSort {
     // constructor. 
     public MergeSort(int[] arr, int m) {
         lists = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            lists.add(new ArrayList<Integer>(Arrays.asList(arr[i])));
+        for (int item: arr) {
+            lists.add(new ArrayList<Integer>(Arrays.asList(item)));
         }
         done = false;
         waiting = 0;
