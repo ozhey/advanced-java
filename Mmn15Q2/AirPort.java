@@ -1,5 +1,4 @@
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.ArrayList;
 import java.util.Random;
 
 // an airport allows flights to depart or land at one of it's runways.
@@ -7,14 +6,14 @@ public class AirPort {
 
     private static final int NUM_OF_RUNWAYS = 3;
     private final String name;
-    private Queue<Integer> flightsQueue; 
+    private ArrayList<Integer> flightsQueue; 
     private int runwaysInUse;
     private boolean[] runways; // true if a runway is occupied or false if it's free
     private Random rnd = new Random();
 
     // constructor
     public AirPort(String name) {
-        flightsQueue = new PriorityQueue<>();
+        flightsQueue = new ArrayList<>();
         runwaysInUse = 0;
         runways = new boolean[NUM_OF_RUNWAYS];
         this.name = name;
@@ -55,14 +54,14 @@ public class AirPort {
     // starts a departure or landing procedure and occupies the runway
     private synchronized int startProcedure(int flightNumber) {
         flightsQueue.add(flightNumber);
-        while (runwaysInUse == NUM_OF_RUNWAYS || flightsQueue.peek() != flightNumber) {
+        while (runwaysInUse == NUM_OF_RUNWAYS || flightsQueue.get(0) != flightNumber) {
             System.out.println("Flight number " + flightNumber + " doesn't have a free runway, and is waiting :(");
             try {
                 wait();
             } catch (InterruptedException e) {
             }
         }
-        flightsQueue.remove();
+        flightsQueue.remove(0);
         runwaysInUse++;
         return availableRunway();
     }
