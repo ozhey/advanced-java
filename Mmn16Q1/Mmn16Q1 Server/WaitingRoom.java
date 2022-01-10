@@ -1,5 +1,3 @@
-package server;
-
 // here clients can wait for another client to chat with them
 // there's never more than one client waiting
 public class WaitingRoom {

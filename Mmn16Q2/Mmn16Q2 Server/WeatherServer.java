@@ -1,5 +1,3 @@
-package server;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -55,13 +53,13 @@ public class WeatherServer {
     }
 
     // recieves the message from the client and constructs a proper response
-    private String constructResponse(String req) {
-        System.out.println(req);
-        if (req.equals("reload")) {
+    private String constructResponse(String request) {
+        System.out.println(request);
+        if (request.equals("reload")) {
             citiesForecast.readWeatherForecast();
             return "Weather forecast updated from file";
         }
-        String forecast = citiesForecast.getForecastForCity(req);
+        String forecast = citiesForecast.getForecastForCity(request);
         if (forecast == null) {
             return "No weather forecast for the specified city was found";
         }
