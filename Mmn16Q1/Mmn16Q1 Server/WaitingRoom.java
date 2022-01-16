@@ -14,10 +14,6 @@ public class WaitingRoom {
         return handleSecondClient(client);  
     }
 
-    public synchronized void wakeAllThreads() {
-        notifyAll();
-    }
-
     // the client is the first client in the waiting room, so it will wait.
     private synchronized ChatThread handleFirstClient(ChatThread client) {
         firstClient = client;
@@ -27,6 +23,7 @@ public class WaitingRoom {
             } catch (Exception e) { }
         } 
         ChatThread target = secondClient;
+        // clear the waiting room for the next clients
         firstClient = null;
         secondClient = null;
         return target;

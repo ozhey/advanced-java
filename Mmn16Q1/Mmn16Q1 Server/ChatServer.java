@@ -7,11 +7,12 @@ public class ChatServer {
     private ServerSocket serverSocket;
     private Socket socket;
     private WaitingRoom waitingRoom;
+    private final static int PORT = 8080;
 
     public ChatServer() {
         waitingRoom = new WaitingRoom();
         try {
-            serverSocket = new ServerSocket(8080);
+            serverSocket = new ServerSocket(PORT);
             System.out.println("Server listening...");
             while (!serverSocket.isClosed()) {
                 socket = serverSocket.accept();

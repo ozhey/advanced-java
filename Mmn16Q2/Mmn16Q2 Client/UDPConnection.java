@@ -7,14 +7,17 @@ public class UDPConnection {
 
     private final int PORT = 8080;
 
-    public String getForecastForCity(String compName, String msg) {
-        return executeRequest(compName, msg);
+    // returns the weather forecast for the given city
+    public String getForecastForCity(String compName, String city) {
+        return executeRequest(compName, city);
     }
 
+    // reloads the weather forecast
     public String reloadForecast(String compName) {
         return executeRequest(compName, "reload");
     }
 
+    // gets the target's address and a message and sends it to the server
     private String executeRequest(String compName, String msg) {
         DatagramSocket clientSocket = null;
         try {
