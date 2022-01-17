@@ -7,13 +7,14 @@ import java.net.SocketException;
 public class WeatherServer {
 
     private CitiesForecast citiesForecast;
+    private static final int PORT = 8080;
 
     // constructor. starts listening to requests
     public WeatherServer() {
         citiesForecast = new CitiesForecast();
         DatagramSocket serverSocket = null;
         try {
-            serverSocket = new DatagramSocket(8080);
+            serverSocket = new DatagramSocket(PORT);
             System.out.println("Server listening...");
         } catch (SocketException e) {
             System.out.println(e);
