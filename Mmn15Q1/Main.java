@@ -17,8 +17,12 @@ public class Main {
         scan.close();
         int[] array = rnd.ints(n, MIN_NUMBER, MAX_NUMBER).toArray();
         MergeSort merger = new MergeSort(array, m);
+        MergeThread[] threads = new MergeThread[m];
         for (int i = 0; i < m; i++) {
-            new MergeThread(merger).start();
+            threads[i] = new MergeThread(merger);
+        }
+        for (int i = 0; i < m; i++) {
+            threads[i].start();
         }
         System.out.println(merger.getResult());
     }

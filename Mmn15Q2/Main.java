@@ -8,12 +8,16 @@ public class Main {
         Random rnd = new Random();
         AirPort tlvAirPort = new AirPort("Tel Aviv");
         AirPort laAirPort = new AirPort("Los Angeles");
-        for (int i = 1; i <= NUM_OF_FLIGHTS; i++) {
+        Flight[] flights = new Flight[NUM_OF_FLIGHTS];
+        for (int i = 0; i < NUM_OF_FLIGHTS; i++) {
             if (rnd.nextBoolean()) { // randomly choose the direction of the flight
-                new Flight(i, tlvAirPort, laAirPort).start();
+                flights[i] = new Flight(i+1, tlvAirPort, laAirPort);
             } else {
-                new Flight(i, laAirPort, tlvAirPort).start();
+                flights[i] = new Flight(i+1, laAirPort, tlvAirPort);
             }
+        }
+        for (int i = 0; i < NUM_OF_FLIGHTS; i++) {
+            flights[i].start();
         }
     }
 }
